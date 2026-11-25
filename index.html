@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>حياة المواطن | ABD</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Arial}
+:root{--main:#7A0C1A;--bg:#F7F3EE}
+body{background:var(--bg);color:#222}
+a{text-decoration:none}
+/* ===== صورة ABD بالكود - بدون ملف خارجي ===== */
+.abdArt{width:230px;height:230px;border-radius:20px;overflow:hidden;position:relative;background:#000;border:4px solid #fff;box-shadow:0 10px 30px rgba(0,0,0,.6);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center}
+.abdArt .topBar{position:absolute;top:0;left:0;right:0;height:28px;background:#00C853;display:flex;align-items:center;justify-content:center;font-size:10px;letter-spacing:2px;font-weight:800}
+.abdArt .mid{font-size:52px;font-weight:900;line-height:1;text-shadow:0 3px 0 #7A0C1A,0 5px 15px rgba(0,0,0,.8);letter-spacing:2px}
+.abdArt .mid span{color:#FFD700}
+.abdArt .sub{font-size:11px;letter-spacing:3px;margin-top:6px}
+.abdArt .bottomBar{position:absolute;bottom:0;left:0;right:0;height:32px;background:#7A0C1A;display:flex;align-items:center;justify-content:center;font-size:10px;letter-spacing:1px}
+.abdArt .side{position:absolute;top:28px;bottom:32px;width:8px;background:linear-gradient(#00C853,#FFD700,#7A0C1A)}
+.abdArt .side.l{left:0}.abdArt .side.r{right:0}
+/* شاشة البداية */
+#splash{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden;background:#000;transition:opacity .8s, visibility .8s}
+#splash.hide{opacity:0;visibility:hidden}
+#splashBg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.45}
+#splashOverlay{position:absolute;inset:0;background:linear-gradient(135deg, rgba(0,200,83,.35), rgba(122,12,26,.55), rgba(0,0,0,.6));animation:colorMove 2s infinite alternate}
+@keyframes colorMove{0%{background:linear-gradient(135deg, rgba(0,200,83,.4), rgba(122,12,26,.5), rgba(0,0,0,.6))}50%{background:linear-gradient(135deg, rgba(255,215,0,.4), rgba(0,200,83,.3), rgba(122,12,26,.5))}100%{background:linear-gradient(135deg, rgba(122,12,26,.6), rgba(0,0,0,.5), rgba(0,200,83,.4))}}
+#splashContent{position:relative;z-index:2;text-align:center;color:#fff;padding:20px}
+#splashArt{animation:floatImg 2s infinite alternate;margin:0 auto}
+@keyframes floatImg{from{transform:translateY(0) rotate(-1deg)}to{transform:translateY(-10px) rotate(1deg)}}
+#splashContent h1{font-size:42px;margin-top:14px;text-shadow:0 2px 10px #000}
+#splashContent p{letter-spacing:3px;font-size:13px;color:#eee;margin-top:4px}
+#splashBar{width:240px;height:6px;background:rgba(255,255,255,.3);border-radius:20px;margin:20px auto 0;overflow:hidden}
+#splashBarFill{height:100%;width:0%;background:#fff;border-radius:20px}
+#splashText{margin-top:12px;font-size:14px}
+.topHeader{background:#fff;padding:14px 15px 12px;text-align:center;border-bottom:1px solid #eee}
+.logoWrap{display:flex;align-items:center;justify-content:center;gap:14px}
+.logoMini{width:68px;height:68px;border-radius:50%;overflow:hidden;border:3px solid var(--main);background:#000;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900;line-height:1;font-size:14px}
+.logoMini span{font-size:9px;letter-spacing:1px;color:#FFD700}
+.logoText h1{font-size:36px;color:var(--main);line-height:1}
+.logoText p{font-size:12px;letter-spacing:2px;color:#888;margin-top:4px}
+.searchBox{margin:14px auto 4px;max-width:480px;display:flex;background:#F1ECE6;border:1px solid #ddd;border-radius:30px;overflow:hidden}
+.searchBox input{flex:1;border:none;background:transparent;padding:12px 16px;text-align:right;font-size:15px;outline:none}
+.searchBox button{background:var(--main);color:#fff;border:none;padding:0 22px;font-size:18px;cursor:pointer}
+.mainNav{background:var(--main);display:flex;overflow-x:auto;white-space:nowrap}
+.mainNav a{color:#fff;padding:14px 18px;font-weight:700;font-size:16px}
+.mainNav a.active{background:#4A060F}
+.breaking{background:#fff;display:flex;align-items:center;border-bottom:1px solid #e5e5e5;padding:8px 12px;gap:10px}
+.breaking .label{background:var(--main);color:#fff;padding:7px 16px;border-radius:4px;font-weight:800}
+.breaking .text{flex:1;font-size:16px;font-weight:600}
+.container{max-width:1100px;margin:auto;padding:18px}
+.card{background:#fff;padding:20px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.06);border:1px solid #eee}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.card img{width:100%;height:165px;object-fit:cover;border-radius:8px;margin-bottom:10px}
+h2.sectionTitle{color:var(--main);font-size:22px;margin:22px 0 12px;border-right:5px solid var(--main);padding-right:10px}
+input,textarea,select{width:100%;padding:12px;margin:7px 0;border:1px solid #ddd;border-radius:8px;background:#FAF8F5;font-size:15px}
+label{font-weight:700;font-size:13px;color:#444}
+.btn{background:var(--main);color:#fff;padding:12px 18px;border:none;border-radius:8px;font-weight:800;cursor:pointer;width:100%;font-size:16px}
+.btn2{background:var(--main);color:#fff;padding:10px 16px;border:none;border-radius:8px;font-weight:700;cursor:pointer}
+.btn-danger{background:#DC2626;color:#fff;padding:6px 10px;border:none;border-radius:6px;cursor:pointer}
+.btn-small{background:#EDE9E3;padding:6px 10px;border:none;border-radius:6px;cursor:pointer}
+.hidden{display:none}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:10px;overflow:hidden}
+th,td{padding:11px;border-bottom:1px solid #eee;text-align:right;font-size:13px;vertical-align:top}
+th{background:var(--main);color:#fff}
+.badge{padding:4px 10px;border-radius:20px;font-size:12px;font-weight:700}
+.pending{background:#FEF9C3}.done{background:#DCFCE7}.rejected{background:#FEE2E2}
+footer{background:#2B060C;color:#fff;text-align:center;padding:22px;margin-top:25px}
+.loginCard{max-width:620px;margin:35px auto;text-align:center}
+.loginCard h2{color:var(--main);font-size:34px;margin-bottom:12px}
+.loginCard p{color:#666;font-size:15px;line-height:1.7}
+.adminBox{background:#fff;padding:22px;border-radius:12px;max-width:420px;margin:30px auto}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}
+.tab{padding:10px 14px;background:#EDE9E3;border:none;border-radius:20px;cursor:pointer;font-weight:700}
+.tab.active{background:var(--main);color:#fff}
+.section{margin:15px 0}
+.contactBar{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:15px}
+.contactBar a{padding:10px 16px;border-radius:20px;color:#fff;font-weight:700}
+.fb{background:#1877F2}.wa{background:#25D366}.mail{background:#EA4335}.call{background:#111}
+.stat{font-size:26px;font-weight:900;color:var(--main)}
+#aiBtn{position:fixed;bottom:20px;left:20px;width:68px;height:68px;border-radius:50%;background:var(--main);color:#fff;font-size:20px;font-weight:900;border:3px solid #fff;cursor:pointer;box-shadow:0 10px 25px rgba(0,0,0,.3);z-index:999}
+#aiPanel{position:fixed;bottom:95px;left:15px;width:360px;max-width:92vw;height:520px;max-height:75vh;background:#fff;border-radius:16px;box-shadow:0 15px 40px rgba(0,0,0,.3);display:flex;flex-direction:column;overflow:hidden;z-index:999}
+#aiHeader{background:var(--main);color:#fff;padding:14px;display:flex;justify-content:space-between;align-items:center}
+#aiMessages{flex:1;padding:12px;overflow-y:auto;background:#F8F7F4;display:flex;flex-direction:column;gap:8px}
+.msg{padding:10px 12px;border-radius:12px;max-width:85%;font-size:14px;line-height:1.6}
+.msg.ai{background:#fff;border:1px solid #e2e8f0;align-self:flex-start}
+.msg.user{background:var(--main);color:#fff;align-self:flex-end}
+#aiInputRow{display:flex;gap:6px;padding:10px;background:#fff;border-top:1px solid #e2e8f0}
+#aiInputRow input{flex:1;margin:0}
+.aiQuick{display:flex;gap:6px;flex-wrap:wrap;padding:8px;background:#fff;border-top:1px solid #f1f5f9}
+.aiQuick button{background:#FDECEC;border:none;padding:6px 10px;border-radius:20px;font-size:12px;cursor:pointer;font-weight:700}
+.catFilter{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.catFilter button{padding:8px 14px;border:1px solid #ddd;background:#fff;border-radius:20px;cursor:pointer;font-weight:700}
+.catFilter button.active{background:var(--main);color:#fff}
+</style>
+</head>
+<body>
+
+<!-- شاشة البداية - صورتك ABD جاهزة بدون ملف خارجي -->
+<div id="splash">
+  <img id="splashBg" src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=1200">
+  <div id="splashOverlay"></div>
+  <div id="splashContent">
+    <div class="abdArt" id="splashArt">
+      <div class="topBar">KNOWLEDGE - POWER - LEGACY</div>
+      <div class="side l"></div><div class="side r"></div>
+      <div class="mid">A<span>B</span>D</div>
+      <div class="sub">HAYAT AL MOUWATIN</div>
+      <div class="bottomBar">حياة المواطن - ABD</div>
+    </div>
+    <h1>حياة المواطن</h1>
+    <p>HAYAT AL MOUWATIN - ABD</p>
+    <div id="splashBar"><div id="splashBarFill"></div></div>
+    <div id="splashText">جار التحميل... مرحبا بك في حياة المواطن</div>
+  </div>
+</div>
+
+<div class="topHeader">
+  <div class="logoWrap">
+    <div class="logoText" style="text-align:right"><h1 id="siteLogoMain">حياة المواطن</h1><p>HAYAT AL MOUWATIN - ABD</p></div>
+    <div class="logoMini"><span>ABD</span>حياة<br>المواطن</div>
+  </div>
+  <div class="searchBox"><input id="searchInput" placeholder="ابحث في الأخبار" oninput="filterNews()"><button onclick="filterNews()">بحث</button></div>
+</div>
+<nav class="mainNav">
+  <a href="#" class="active" onclick="filterCat('الكل',this)">الرئيسية</a>
+  <a href="#" onclick="filterCat('الوطنية',this)">الوطنية</a>
+  <a href="#" onclick="filterCat('الدولية',this)">الدولية</a>
+  <a href="#" onclick="filterCat('السياسة',this)">السياسة</a>
+  <a href="#" onclick="filterCat('الاقتصاد',this)">الاقتصاد</a>
+  <a href="#" onclick="filterCat('الرياضة',this)">الرياضة</a>
+  <a href="#" onclick="filterCat('الثقافة',this)">الثقافة</a>
+  <a href="#" onclick="showAdminLogin()">لوحة تحكم</a>
+</nav>
+<div class="breaking"><div class="text" id="breakingText">ارتفاع صادرات الأسماك يعزز نمو الاقتصاد</div><div class="label">عاجل</div></div>
+<div id="site"><div class="container">
+  <div class="card loginCard">
+    <h2>تسجيل الدخول</h2>
+    <p>بيئة تجريبية: أي بيانات دخول تعمل، والتغييرات تحفظ في متصفحك فقط.</p>
+    <input id="quickUser" value="admin" placeholder="اسم المستخدم">
+    <input id="quickPass" type="password" value="1234" placeholder="كلمة السر">
+    <button class="btn" onclick="quickLogin()">تسجيل الدخول</button>
+    <p style="font-size:12px;margin-top:10px">للدخول للوحة التحكم: admin / ABD123</p>
+  </div>
+  <div class="grid">
+    <div class="card"><div class="stat" id="stat1">0</div><p>إجمالي الطلبات</p></div>
+    <div class="card"><div class="stat" id="stat2">0</div><p>طلبات مقبولة</p></div>
+    <div class="card"><div class="stat" id="stat3">0</div><p>أخبار منشورة</p></div>
+    <div class="card"><div class="stat" id="stat4">0</div><p>صور في المعرض</p></div>
+  </div>
+  <h2 class="sectionTitle">آخر الأخبار - موريتانيا اليوم</h2>
+  <div class="catFilter" id="catFilter"></div>
+  <div id="newsList" class="grid"></div>
+  <h2 class="sectionTitle">تقديم طلب / شكوى</h2>
+  <div class="card">
+    <input id="name" placeholder="الاسم الكامل">
+    <input id="phone" placeholder="رقم الهاتف / واتساب">
+    <select id="type"><option>طلب وثيقة</option><option>شكوى</option><option>استفسار</option><option>اقتراح</option></select>
+    <textarea id="msg" placeholder="اكتب تفاصيل طلبك هنا..."></textarea>
+    <button class="btn" onclick="sendRequest()">إرسال الطلب</button>
+    <p id="result" style="margin-top:10px;color:green;font-weight:700"></p>
+  </div>
+  <h2 class="sectionTitle">معرض الصور - ABD</h2>
+  <div id="galleryList" class="grid"></div>
+  <h2 class="sectionTitle">تواصل معنا</h2>
+  <div class="card" id="contactCard"></div>
+  <div class="contactBar" id="contactBarTop"></div>
+</div></div>
+<div id="loginBox" class="hidden"><div class="adminBox">
+  <h2 style="color:var(--main)">دخول لوحة التحكم</h2><p style="font-size:13px;color:#64748b">محمية - فقط للمدير</p>
+  <input id="adminUser" placeholder="اسم المستخدم"><input id="adminPass" type="password" placeholder="كلمة السر">
+  <button class="btn" onclick="loginAdmin()">دخول</button>
+  <p style="font-size:12px;margin-top:10px">تجريبي: admin / ABD123</p>
+  <button onclick="hideAdmin()" style="margin-top:10px;background:none;border:none;color:#64748b;cursor:pointer">رجوع للموقع</button>
+</div></div>
+<div id="dashboard" class="hidden"><div class="container">
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px"><h2>لوحة تحكم ABD - تحكم كامل</h2><button class="btn2" onclick="logout()">خروج</button></div>
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('tabNews',this)">الأخبار</button>
+    <button class="tab" onclick="showTab('tabGallery',this)">الصور</button>
+    <button class="tab" onclick="showTab('tabRequests',this)">الطلبات</button>
+    <button class="tab" onclick="showTab('tabContact',this)">التواصل</button>
+    <button class="tab" onclick="showTab('tabSettings',this)">إعدادات الموقع</button>
+    <button class="tab" onclick="showTab('tabAI',this)">تدريب الذكاء الاصطناعي</button>
+    <button class="tab" onclick="showTab('tabSecurity',this)">الأمان</button>
+  </div>
+  <div id="tabNews" class="section"><div class="card"><h3>إضافة خبر جديد</h3>
+    <input id="newsTitle" placeholder="عنوان الخبر"><textarea id="newsText" placeholder="نص الخبر..."></textarea>
+    <label>التصنيف</label><select id="newsCat"><option>الوطنية</option><option>الدولية</option><option>السياسة</option><option>الاقتصاد</option><option>الرياضة</option><option>الثقافة</option></select>
+    <label>رابط صورة الخبر</label><input id="newsImg" placeholder="https://..."><input type="file" accept="image/*" onchange="previewFile(this,'newsImg')">
+    <label>خبر عاجل؟</label><select id="newsBreaking"><option value="no">لا</option><option value="yes">نعم - يظهر في شريط عاجل</option></select>
+    <button class="btn2" onclick="addNews()">نشر الخبر</button></div><div id="adminNewsList" class="grid" style="margin-top:10px"></div></div>
+  <div id="tabGallery" class="section hidden"><div class="card"><h3>إضافة صورة جديدة</h3>
+    <input id="galTitle" placeholder="عنوان الصورة"><input id="galImg" placeholder="رابط صورة"><input type="file" accept="image/*" onchange="previewFile(this,'galImg')">
+    <button class="btn2" onclick="addGallery()">إضافة للمعرض</button></div><div id="adminGalleryList" class="grid" style="margin-top:10px"></div></div>
+  <div id="tabRequests" class="section hidden"><div class="card"><p>عدد الطلبات: <b id="reqCount">0</b> | <button class="btn-small" onclick="exportRequests()">تحميل كل الطلبات</button> <button class="btn-danger" onclick="clearRequests()">حذف الكل</button></p></div>
+    <table style="margin-top:10px"><thead><tr><th>الاسم</th><th>النوع</th><th>التفاصيل</th><th>الحالة</th><th>تحكم</th></tr></thead><tbody id="tableBody"></tbody></table></div>
+  <div id="tabContact" class="section hidden"><div class="card"><h3>تعديل معلومات التواصل</h3>
+    <label>البريد الإلكتروني</label><input id="setEmail"><label>رقم الهاتف</label><input id="setPhone"><label>رقم واتساب (بدون +)</label><input id="setWhats"><label>رابط فيسبوك</label><input id="setFb"><label>العنوان</label><input id="setAddress">
+    <button class="btn2" onclick="saveContact()">حفظ التواصل</button><p id="contactSaved" style="color:green;font-size:12px"></p></div></div>
+  <div id="tabSettings" class="section hidden"><div class="card"><h3>إعدادات الموقع</h3>
+    <label>اسم الموقع</label><input id="setSiteName"><label>اللون الرئيسي</label><input type="color" id="setColor">
+    <label>نص شريط عاجل</label><input id="setBreaking">
+    <button class="btn2" onclick="saveSettings()">حفظ الإعدادات</button></div></div>
+  <div id="tabAI" class="section hidden"><div class="card"><h3>تدريب الذكاء الاصطناعي - ABD AI</h3>
+    <label>سؤال / كلمة يتعلمها</label><input id="aiQ" placeholder="مثال: عاصمة موريتانيا">
+    <label>جواب الذكاء الاصطناعي</label><textarea id="aiA" placeholder="مثال: نواكشوط هي عاصمة موريتانيا..."></textarea>
+    <button class="btn2" onclick="trainAI()">علم الذكاء الاصطناعي</button>
+    <h4 style="margin-top:15px">المعلومات التي تعلمها:</h4><div id="aiKnowledgeList"></div>
+    <hr style="margin:15px 0">
+    <label>مفتاح OpenAI (اختياري)</label><input id="openaiKey" placeholder="sk-...">
+    <button class="btn-small" onclick="saveOpenAIKey()">حفظ المفتاح</button>
+  </div></div>
+  <div id="tabSecurity" class="section hidden"><div class="card"><h3>تغيير كلمة سر لوحة التحكم</h3>
+    <label>اسم مستخدم جديد</label><input id="newUser" placeholder="admin">
+    <label>كلمة سر جديدة قوية</label><input id="newPass" type="password" placeholder="كلمة سر جديدة">
+    <button class="btn2" onclick="saveSecurity()">تغيير كلمة السر</button>
+    <hr style="margin:15px 0">
+    <button class="btn-danger" onclick="resetAll()">إعادة ضبط الموقع كامل</button>
+  </div></div>
+</div></div>
+<footer>
+  <p>© 2026 <span id="footerName">حياة المواطن</span> - ABD | جميع الحقوق محفوظة</p>
+  <p style="font-size:12px;opacity:.7">نواكشوط - موريتانيا | KNOWLEDGE - POWER - LEGACY</p>
+</footer>
+<button id="aiBtn" onclick="toggleAI()">AI</button>
+<div id="aiPanel" class="hidden">
+  <div id="aiHeader"><div><b>ABD AI - مساعد حياة المواطن</b><br><small>متصل الآن - يعرف أخبار موريتانيا - يتحكم في الموقع</small></div><button onclick="toggleAI()" style="background:none;border:none;color:#fff;font-size:18px;cursor:pointer">X</button></div>
+  <div id="aiMessages"></div>
+  <div class="aiQuick">
+    <button onclick="quickAI('شنو أخبار موريتانيا اليوم؟')">أخبار اليوم</button>
+    <button onclick="quickAI('شنو خدمات الموقع؟')">الخدمات</button>
+    <button onclick="quickAI('كيف نقدم طلب؟')">تقديم طلب</button>
+    <button onclick="quickAI('اضف خبر: افتتاح خدمة جديدة في نواكشوط')">جرب: أضف خبر</button>
+  </div>
+  <div id="aiInputRow"><input id="aiInput" placeholder="اكتب هنا... مثلا: غير اللون للأزرق" onkeypress="if(event.key==='Enter')sendAIMsg()"><button class="btn2" onclick="sendAIMsg()">إرسال</button></div>
+</div>
+<script>
+let splashProgress=0;
+let splashTimer=setInterval(()=>{
+  splashProgress+=100/30;
+  let fill=document.getElementById('splashBarFill');
+  if(fill) fill.style.width=Math.min(splashProgress,100)+'%';
+  if(splashProgress>=100){ clearInterval(splashTimer); document.getElementById('splash').classList.add('hide'); setTimeout(()=>{document.getElementById('splash').style.display='none';},900); }
+},100);
+let DB = {
+  requests: JSON.parse(localStorage.getItem('hayat_requests')||'[]'),
+  news: JSON.parse(localStorage.getItem('hayat_news')||'[{"title":"ارتفاع صادرات الأسماك يعزز نمو الاقتصاد","text":"تشهد موريتانيا ارتفاعا ملحوظا في صادرات الأسماك.","img":"https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=800","cat":"الاقتصاد","breaking":"yes"},{"title":"نواكشوط: افتتاح مشاريع جديدة لتحسين خدمات المواطن","text":"أعلنت السلطات في نواكشوط عن إطلاق مجموعة مشاريع جديدة.","img":"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800","cat":"الوطنية","breaking":"no"},{"title":"المنتخب الموريتاني يستعد لمباريات قادمة","text":"يواصل المنتخب الوطني المرابطون استعداداته للمباريات القادمة.","img":"https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800","cat":"الرياضة","breaking":"no"}]'),
+  gallery: JSON.parse(localStorage.getItem('hayat_gallery')||'[{"title":"نواكشوط","img":"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800"},{"title":"موريتانيا","img":"https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=800"},{"title":"أخبار","img":"https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800"}]'),
+  contact: JSON.parse(localStorage.getItem('hayat_contact')||'{"email":"contact@hayat-mouwatin.mr","phone":"+222 00000000","whats":"22200000000","fb":"https://facebook.com","address":"نواكشوط - موريتانيا"}'),
+  settings: JSON.parse(localStorage.getItem('hayat_settings')||'{"siteName":"حياة المواطن","color":"#7A0C1A","breaking":"ارتفاع صادرات الأسماك يعزز نمو الاقتصاد"}'),
+  admin: JSON.parse(localStorage.getItem('hayat_admin')||'{"user":"admin","pass":"ABD123"}'),
+  aiKnowledge: JSON.parse(localStorage.getItem('hayat_ai_knowledge')||'[{"q":"عاصمة موريتانيا","a":"عاصمة موريتانيا هي نواكشوط."},{"q":"ABD","a":"ABD هو مؤسس موقع حياة المواطن، شعاره KNOWLEDGE - POWER - LEGACY."}]'),
+  openaiKey: localStorage.getItem('hayat_openai')||''
+};
+let currentCat='الكل'; let searchTerm='';
+function saveAll(){localStorage.setItem('hayat_requests',JSON.stringify(DB.requests));localStorage.setItem('hayat_news',JSON.stringify(DB.news));localStorage.setItem('hayat_gallery',JSON.stringify(DB.gallery));localStorage.setItem('hayat_contact',JSON.stringify(DB.contact));localStorage.setItem('hayat_settings',JSON.stringify(DB.settings));localStorage.setItem('hayat_admin',JSON.stringify(DB.admin));localStorage.setItem('hayat_ai_knowledge',JSON.stringify(DB.aiKnowledge));localStorage.setItem('hayat_openai',DB.openaiKey);render();}
+function previewFile(input,targetId){let f=input.files[0]; if(!f) return; let r=new FileReader(); r.onload=e=>{document.getElementById(targetId).value=e.target.result; alert('تم رفع الصورة');}; r.readAsDataURL(f);}
+function filterCat(cat,el){ currentCat=cat; document.querySelectorAll('.mainNav a').forEach(a=>a.classList.remove('active')); if(el) el.classList.add('active'); render(); }
+function filterNews(){ searchTerm=document.getElementById('searchInput').value; render(); }
+function render(){
+  document.documentElement.style.setProperty('--main',DB.settings.color);
+  document.getElementById('siteLogoMain').innerText=DB.settings.siteName;
+  document.getElementById('footerName').innerText=DB.settings.siteName;
+  document.getElementById('breakingText').innerText=DB.settings.breaking;
+  document.getElementById('stat1').innerText=DB.requests.length;
+  document.getElementById('stat2').innerText=DB.requests.filter(r=>r.status=='مقبول').length;
+  document.getElementById('stat3').innerText=DB.news.length;
+  document.getElementById('stat4').innerText=DB.gallery.length;
+  let cats=['الكل','الوطنية','الدولية','السياسة','الاقتصاد','الرياضة','الثقافة'];
+  document.getElementById('catFilter').innerHTML=cats.map(c=>`<button class="${c===currentCat?'active':''}" onclick="filterCat('${c}',null)">${c}</button>`).join('');
+  let filtered=DB.news.filter(n=> (currentCat==='الكل'||n.cat===currentCat) && (n.title.includes(searchTerm)||n.text.includes(searchTerm)));
+  document.getElementById('newsList').innerHTML=filtered.map(n=>`<div class="card"><img src="${n.img}"><div style="font-size:12px;color:var(--main);font-weight:800">${n.cat||''} ${n.breaking==='yes'?' | عاجل':''}</div><h3>${n.title}</h3><p>${n.text}</p></div>`).join('')||'<p>لا توجد أخبار</p>';
+  document.getElementById('adminNewsList').innerHTML=DB.news.map((n,i)=>`<div class="card"><img src="${n.img}"><h3>${n.title}</h3><p>${n.text}</p><button class="btn-danger" onclick="delNews(${i})">حذف</button></div>`).join('');
+  document.getElementById('galleryList').innerHTML=DB.gallery.map(g=>`<div class="card"><img src="${g.img}"><h3>${g.title}</h3></div>`).join('');
+  document.getElementById('adminGalleryList').innerHTML=DB.gallery.map((g,i)=>`<div class="card"><img src="${g.img}"><h3>${g.title}</h3><button class="btn-danger" onclick="delGallery(${i})">حذف</button></div>`).join('');
+  let c=DB.contact;
+  document.getElementById('contactBarTop').innerHTML=`<a class="fb" href="${c.fb}" target="_blank">فيسبوك</a><a class="wa" href="https://wa.me/${c.whats}" target="_blank">واتساب</a><a class="mail" href="mailto:${c.email}">بريد</a><a class="call" href="tel:${c.phone}">${c.phone}</a>`;
+  document.getElementById('contactCard').innerHTML=`<p>البريد: <b>${c.email}</b></p><p>الهاتف: <b>${c.phone}</b></p><p>واتساب: <a href="https://wa.me/${c.whats}" target="_blank">اضغط هنا للمحادثة</a></p><p>فيسبوك: <a href="${c.fb}" target="_blank">${c.fb}</a></p><p>العنوان: ${c.address}</p>`;
+  document.getElementById('reqCount').innerText=DB.requests.length;
+  document.getElementById('tableBody').innerHTML=DB.requests.map((r,i)=>`<tr><td>${r.name}<br><small>${r.phone}</small></td><td>${r.type}</td><td>${r.msg}</td><td><span class="badge ${r.status=='مقبول'?'done':r.status=='مرفوض'?'rejected':'pending'}">${r.status}</span></td><td><button class="btn-small" onclick="setStatus(${i},'مقبول')">قبول</button> <button class="btn-small" onclick="setStatus(${i},'مرفوض')">رفض</button> <button class="btn-danger" onclick="delReq(${i})">حذف</button></td></tr>`).join('')||'<tr><td colspan="5">لا توجد طلبات</td></tr>';
+  document.getElementById('setEmail').value=c.email; document.getElementById('setPhone').value=c.phone; document.getElementById('setWhats').value=c.whats; document.getElementById('setFb').value=c.fb; document.getElementById('setAddress').value=c.address;
+  document.getElementById('setSiteName').value=DB.settings.siteName; document.getElementById('setColor').value=DB.settings.color; document.getElementById('setBreaking').value=DB.settings.breaking;
+  document.getElementById('newUser').value=DB.admin.user;
+  document.getElementById('aiKnowledgeList').innerHTML=DB.aiKnowledge.map((k,i)=>`<div style="background:#f8fafc;padding:10px;border-radius:8px;margin:6px 0"><b>س: ${k.q}</b><br><span>ج: ${k.a}</span><br><button class="btn-danger" style="margin-top:5px" onclick="delKnowledge(${i})">حذف</button></div>`).join('');
+  document.getElementById('openaiKey').value=DB.openaiKey;
+}
+function quickLogin(){let u=document.getElementById('quickUser').value, p=document.getElementById('quickPass').value; if(u===DB.admin.user && p===DB.admin.pass){ showDashboard(); } else { alert('مرحبا بك. للدخول للوحة التحكم استخدم admin / ABD123'); }}
+function sendRequest(){let n=document.getElementById('name').value, p=document.getElementById('phone').value, t=document.getElementById('type').value, m=document.getElementById('msg').value; if(!n||!m){alert('من فضلك أكمل الاسم والتفاصيل');return;} DB.requests.push({name:n,phone:p,type:t,msg:m,status:'قيد المعالجة'}); saveAll(); document.getElementById('result').innerText='تم إرسال طلبك بنجاح. رقم طلبك: '+(DB.requests.length); document.getElementById('name').value=''; document.getElementById('msg').value='';}
+function addNews(){let t=document.getElementById('newsTitle').value, x=document.getElementById('newsText').value, img=document.getElementById('newsImg').value, cat=document.getElementById('newsCat').value, br=document.getElementById('newsBreaking').value; if(!t||!x){alert('أكمل العنوان والنص');return;} DB.news.unshift({title:t,text:x,img:img||'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800',cat:cat,breaking:br}); if(br==='yes'){ DB.settings.breaking=t; } saveAll(); alert('تم نشر الخبر');}
+function delNews(i){if(confirm('حذف الخبر؟')){DB.news.splice(i,1);saveAll();}}
+function addGallery(){let t=document.getElementById('galTitle').value, img=document.getElementById('galImg').value; if(!t||!img){alert('أكمل العنوان والصورة');return;} DB.gallery.push({title:t,img}); saveAll(); alert('تمت إضافة الصورة');}
+function delGallery(i){if(confirm('حذف الصورة؟')){DB.gallery.splice(i,1);saveAll();}}
+function setStatus(i,s){DB.requests[i].status=s;saveAll();}
+function delReq(i){if(confirm('حذف الطلب؟')){DB.requests.splice(i,1);saveAll();}}
+function clearRequests(){if(confirm('حذف كل الطلبات؟')){DB.requests=[];saveAll();}}
+function exportRequests(){let txt=DB.requests.map(r=>`${r.name} | ${r.phone} | ${r.type} | ${r.msg} | ${r.status}`).join('\n'); let b=new Blob([txt],{type:'text/plain'}); let a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='طلبات.txt'; a.click();}
+function saveContact(){DB.contact={email:document.getElementById('setEmail').value,phone:document.getElementById('setPhone').value,whats:document.getElementById('setWhats').value,fb:document.getElementById('setFb').value,address:document.getElementById('setAddress').value}; saveAll(); document.getElementById('contactSaved').innerText='تم حفظ معلومات التواصل';}
+function saveSettings(){DB.settings={siteName:document.getElementById('setSiteName').value,color:document.getElementById('setColor').value,breaking:document.getElementById('setBreaking').value}; saveAll(); alert('تم حفظ الإعدادات');}
+function saveSecurity(){let u=document.getElementById('newUser').value, p=document.getElementById('newPass').value; if(!u||!p){alert('أكمل المستخدم وكلمة السر');return;} DB.admin={user:u,pass:p}; saveAll(); alert('تم تغيير كلمة السر بنجاح');}
+function resetAll(){if(confirm('متأكد؟ سيتم مسح كل شيء')){localStorage.clear();location.reload();}}
+function showTab(id,btn){document.querySelectorAll('.section').forEach(s=>s.classList.add('hidden')); document.getElementById(id).classList.remove('hidden'); document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active')); btn.classList.add('active');}
+function showAdminLogin(){document.getElementById('site').classList.add('hidden');document.getElementById('loginBox').classList.remove('hidden');}
+function hideAdmin(){document.getElementById('loginBox').classList.add('hidden');document.getElementById('site').classList.remove('hidden');}
+function showDashboard(){document.getElementById('site').classList.add('hidden');document.getElementById('loginBox').classList.add('hidden');document.getElementById('dashboard').classList.remove('hidden');render();}
+function loginAdmin(){let u=document.getElementById('adminUser').value, p=document.getElementById('adminPass').value; if(u===DB.admin.user && p===DB.admin.pass){showDashboard();} else alert('كلمة السر خاطئة');}
+function logout(){document.getElementById('dashboard').classList.add('hidden');document.getElementById('site').classList.remove('hidden');}
+function toggleAI(){let p=document.getElementById('aiPanel'); p.classList.toggle('hidden'); if(!p.classList.contains('hidden') && document.getElementById('aiMessages').innerHTML===''){addAIMsg('أهلا بك. أنا ABD AI، مساعد حياة المواطن.');}}
+function addAIMsg(html){let d=document.getElementById('aiMessages'); d.innerHTML+=`<div class="msg ai">${html}</div>`; d.scrollTop=d.scrollHeight;}
+function addUserMsg(txt){let d=document.getElementById('aiMessages'); d.innerHTML+=`<div class="msg user">${txt}</div>`; d.scrollTop=d.scrollHeight;}
+function quickAI(txt){document.getElementById('aiInput').value=txt; sendAIMsg();}
+function sendAIMsg(){let inp=document.getElementById('aiInput'); let txt=inp.value.trim(); if(!txt) return; addUserMsg(txt); inp.value=''; setTimeout(()=>{ handleAI(txt); },500);}
+async function handleAI(text){
+  let t=text.toLowerCase();
+  if(t.includes('اضف خبر') || t.includes('أضف خبر')){let title=text.replace(/اضف خبر|أضف خبر|:|:/gi,'').trim() || 'خبر جديد'; DB.news.unshift({title:title,text:'تم نشر هذا الخبر بواسطة ABD AI.',img:'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800',cat:'الوطنية',breaking:'no'}); saveAll(); addAIMsg(`تم. أضفت لك خبر جديد: <b>${title}</b>`); return;}
+  if(t.includes('اخبار') || t.includes('أخبار')){addAIMsg('<b>أخبار موريتانيا اليوم:</b><br>1. ارتفاع صادرات الأسماك يعزز نمو الاقتصاد<br>2. نواكشوط: افتتاح مشاريع جديدة<br>3. المنتخب الموريتاني يستعد لمباريات قادمة'); return;}
+  for(let k of DB.aiKnowledge){ if(t.includes(k.q.toLowerCase())){ addAIMsg(`<b>${k.a}</b>`); return; } }
+  addAIMsg('فهمتك. جرب أن تقول: شنو أخبار موريتانيا اليوم؟ أو اضف خبر: ...');
+}
+function trainAI(){let q=document.getElementById('aiQ').value.trim(), a=document.getElementById('aiA').value.trim(); if(!q||!a){alert('أكمل السؤال والجواب');return;} DB.aiKnowledge.push({q,a}); saveAll(); alert('تم تدريب الذكاء الاصطناعي'); document.getElementById('aiQ').value=''; document.getElementById('aiA').value='';}
+function delKnowledge(i){DB.aiKnowledge.splice(i,1); saveAll();}
+function saveOpenAIKey(){DB.openaiKey=document.getElementById('openaiKey').value.trim(); saveAll(); alert('تم حفظ مفتاح OpenAI');}
+render();
+</script>
+</body>
+</html>
