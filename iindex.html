@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>حياة المواطن | ABD</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Arial}
+body{background:#F7F3EE;color:#222}
+:root{--main:#7A0C1A}
+#splash{position:fixed;inset:0;z-index:9999;background:#000;display:flex;align-items:center;justify-content:center;flex-direction:column;transition:opacity .8s}
+#splash.hide{opacity:0;visibility:hidden}
+.abdArt{width:210px;height:210px;border-radius:20px;background:#000;border:4px solid #fff;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;animation:float 2s infinite alternate;color:#fff}
+@keyframes float{from{transform:translateY(0)}to{transform:translateY(-10px)}}
+.abdArt .top{position:absolute;top:0;left:0;right:0;height:26px;background:#00C853;display:flex;align-items:center;justify-content:center;font-size:10px;letter-spacing:1px;font-weight:800}
+.abdArt .mid{font-size:50px;font-weight:900}.abdArt .mid span{color:#FFD700}
+.abdArt .sub{font-size:11px;letter-spacing:2px}
+.abdArt .bot{position:absolute;bottom:0;left:0;right:0;height:30px;background:#7A0C1A;display:flex;align-items:center;justify-content:center;font-size:10px}
+#splash h1{color:#fff;font-size:32px;margin-top:14px}#splash p{color:#ddd;font-size:13px;letter-spacing:2px}
+#bar{width:220px;height:6px;background:#333;border-radius:20px;margin-top:16px;overflow:hidden}
+#barFill{height:100%;width:0%;background:#fff}
+.topHeader{background:#fff;padding:14px;text-align:center;border-bottom:1px solid #eee}
+.logoMini{width:68px;height:68px;border-radius:50%;background:#000;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900;border:3px solid var(--main);margin:auto}
+.logoMini span{font-size:9px;color:#FFD700}
+.topHeader h1{font-size:32px;color:var(--main);margin-top:6px}
+.topHeader p{font-size:12px;letter-spacing:2px;color:#888}
+.mainNav{background:var(--main);display:flex;overflow-x:auto;white-space:nowrap}
+.mainNav a{color:#fff;padding:13px 16px;font-weight:700;text-decoration:none}
+.mainNav a.active{background:#4A060F}
+.breaking{background:#fff;display:flex;align-items:center;padding:8px 12px;gap:10px;border-bottom:1px solid #eee}
+.breaking .label{background:var(--main);color:#fff;padding:7px 14px;border-radius:4px;font-weight:800}
+.container{max-width:1100px;margin:auto;padding:16px}
+.card{background:#fff;padding:18px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.06);border:1px solid #eee;margin-bottom:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.card img{width:100%;height:165px;object-fit:cover;border-radius:8px;margin-bottom:10px}
+h2{color:var(--main);font-size:22px;margin:20px 0 12px;border-right:5px solid var(--main);padding-right:10px}
+input,textarea,select{width:100%;padding:12px;margin:7px 0;border:1px solid #ddd;border-radius:8px;background:#FAF8F5;font-size:15px}
+.btn{background:var(--main);color:#fff;padding:12px;border:none;border-radius:8px;font-weight:800;cursor:pointer;width:100%;font-size:16px}
+.btn2{background:var(--main);color:#fff;padding:10px 16px;border:none;border-radius:8px;font-weight:700;cursor:pointer}
+.hidden{display:none}
+footer{background:#2B060C;color:#fff;text-align:center;padding:20px;margin-top:20px}
+#aiBtn{position:fixed;bottom:20px;left:20px;width:65px;height:65px;border-radius:50%;background:var(--main);color:#fff;font-size:20px;font-weight:900;border:3px solid #fff;cursor:pointer;z-index:999}
+#aiPanel{position:fixed;bottom:95px;left:15px;width:360px;max-width:92vw;height:480px;background:#fff;border-radius:16px;box-shadow:0 15px 40px rgba(0,0,0,.3);display:flex;flex-direction:column;overflow:hidden;z-index:999}
+#aiHeader{background:var(--main);color:#fff;padding:12px;display:flex;justify-content:space-between}
+#aiMessages{flex:1;padding:12px;overflow-y:auto;background:#F8F7F4;display:flex;flex-direction:column;gap:8px}
+.msg{padding:10px;border-radius:12px;max-width:85%;font-size:14px}
+.msg.ai{background:#fff;border:1px solid #e2e8f0}
+.msg.user{background:var(--main);color:#fff;align-self:flex-end}
+#aiInputRow{display:flex;gap:6px;padding:10px;background:#fff;border-top:1px solid #eee}
+#aiInputRow input{flex:1;margin:0}
+</style>
+</head>
+<body>
+<div id="splash"><div class="abdArt"><div class="top">KNOWLEDGE - POWER - LEGACY</div><div class="mid">A<span>B</span>D</div><div class="sub">HAYAT AL MOUWATIN</div><div class="bot">حياة المواطن - ABD</div></div><h1>حياة المواطن</h1><p>HAYAT AL MOUWATIN - ABD</p><div id="bar"><div id="barFill"></div></div></div>
+<div class="topHeader"><div class="logoMini"><span>ABD</span>حياة<br>المواطن</div><h1>حياة المواطن</h1><p>HAYAT AL MOUWATIN - ABD</p></div>
+<nav class="mainNav"><a href="#" class="active">الرئيسية</a><a href="#">الوطنية</a><a href="#">الاقتصاد</a><a href="#">الرياضة</a><a href="#" onclick="showAdmin()">لوحة تحكم</a></nav>
+<div class="breaking"><div id="breakingText">ارتفاع صادرات الأسماك يعزز نمو الاقتصاد</div><div class="label">عاجل</div></div>
+<div id="site"><div class="container">
+<div class="card" style="text-align:center"><h2>تسجيل الدخول</h2><p>تجريبي: admin / ABD123</p><input id="quickUser" value="admin"><input id="quickPass" type="password" value="1234"><button class="btn" onclick="quickLogin()">تسجيل الدخول</button></div>
+<h2>آخر الأخبار - موريتانيا اليوم</h2>
+<div id="newsList" class="grid"></div>
+<h2>تقديم طلب / شكوى</h2>
+<div class="card"><input id="name" placeholder="الاسم الكامل"><input id="phone" placeholder="رقم الهاتف / واتساب"><select id="type"><option>طلب وثيقة</option><option>شكوى</option><option>استفسار</option><option>اقتراح</option></select><textarea id="msg" placeholder="اكتب تفاصيل طلبك هنا..."></textarea><button class="btn" onclick="sendRequest()">إرسال الطلب</button><p id="result" style="color:green;font-weight:700;margin-top:8px"></p></div>
+<h2>معرض الصور - ABD</h2>
+<div id="galleryList" class="grid"></div>
+<h2>تواصل معنا</h2>
+<div class="card" id="contactCard"></div>
+</div></div>
+<div id="loginBox" class="hidden"><div class="card" style="max-width:420px;margin:30px auto"><h2>دخول لوحة التحكم</h2><input id="adminUser" placeholder="اسم المستخدم"><input id="adminPass" type="password" placeholder="كلمة السر"><button class="btn" onclick="loginAdmin()">دخول</button><p style="font-size:12px;margin-top:8px">تجريبي: admin / ABD123</p><button onclick="hideAdmin()" style="margin-top:10px;background:none;border:none;color:#666;cursor:pointer">رجوع للموقع</button></div></div>
+<div id="dashboard" class="hidden"><div class="container"><h2>لوحة تحكم ABD</h2><button class="btn2" onclick="logout()">خروج</button><div class="card" style="margin-top:12px"><h3>إضافة خبر جديد</h3><input id="newsTitle" placeholder="عنوان الخبر"><textarea id="newsText" placeholder="نص الخبر..."></textarea><input id="newsImg" placeholder="رابط صورة https://..."><button class="btn2" onclick="addNews()">نشر الخبر</button></div><div id="adminNewsList" class="grid"></div><div class="card"><h3>الطلبات</h3><div id="reqList"></div></div></div></div>
+<footer><p>© 2026 حياة المواطن - ABD | جميع الحقوق محفوظة</p><p style="font-size:12px;opacity:.7">نواكشوط - موريتانيا | KNOWLEDGE - POWER - LEGACY</p></footer>
+<button id="aiBtn" onclick="toggleAI()">AI</button>
+<div id="aiPanel" class="hidden"><div id="aiHeader"><b>ABD AI - مساعد حياة المواطن</b><button onclick="toggleAI()" style="background:none;border:none;color:#fff;cursor:pointer">X</button></div><div id="aiMessages"></div><div id="aiInputRow"><input id="aiInput" placeholder="اكتب هنا..." onkeypress="if(event.key==='Enter')sendAIMsg()"><button class="btn2" onclick="sendAIMsg()">إرسال</button></div></div>
+<script>
+let sp=0;let spt=setInterval(()=>{sp+=100/30;document.getElementById('barFill').style.width=Math.min(sp,100)+'%';if(sp>=100){clearInterval(spt);document.getElementById('splash').classList.add('hide');setTimeout(()=>{document.getElementById('splash').style.display='none'},800);}},100);
+let DB={requests:JSON.parse(localStorage.getItem('hayat_requests')||'[]'),news:JSON.parse(localStorage.getItem('hayat_news')||'[{"title":"ارتفاع صادرات الأسماك يعزز نمو الاقتصاد","text":"تشهد موريتانيا ارتفاعا ملحوظا في صادرات الأسماك.","img":"https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=800","cat":"الاقتصاد"},{"title":"نواكشوط: افتتاح مشاريع جديدة لتحسين خدمات المواطن","text":"أعلنت السلطات في نواكشوط عن إطلاق مجموعة مشاريع جديدة.","img":"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800","cat":"الوطنية"},{"title":"المنتخب الموريتاني يستعد لمباريات قادمة","text":"يواصل المنتخب الوطني المرابطون استعداداته.","img":"https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800","cat":"الرياضة"}]'),gallery:JSON.parse(localStorage.getItem('hayat_gallery')||'[{"title":"نواكشوط","img":"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800"},{"title":"موريتانيا","img":"https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=800"},{"title":"أخبار","img":"https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800"}]'),contact:{email:"contact@hayat-mouwatin.mr",phone:"+222 00000000",whats:"22200000000",fb:"https://facebook.com",address:"نواكشوط - موريتانيا"},admin:{user:"admin",pass:"ABD123"}};
+function saveAll(){localStorage.setItem('hayat_requests',JSON.stringify(DB.requests));localStorage.setItem('hayat_news',JSON.stringify(DB.news));localStorage.setItem('hayat_gallery',JSON.stringify(DB.gallery));render();}
+function render(){document.getElementById('newsList').innerHTML=DB.news.map(n=>`<div class="card"><img src="${n.img}"><h3>${n.title}</h3><p>${n.text}</p></div>`).join('');document.getElementById('adminNewsList').innerHTML=DB.news.map((n,i)=>`<div class="card"><img src="${n.img}"><h3>${n.title}</h3><button class="btn2" onclick="delNews(${i})" style="background:#DC2626">حذف</button></div>`).join('');document.getElementById('galleryList').innerHTML=DB.gallery.map(g=>`<div class="card"><img src="${g.img}"><h3>${g.title}</h3></div>`).join('');let c=DB.contact;document.getElementById('contactCard').innerHTML=`<p>البريد: <b>${c.email}</b></p><p>الهاتف: <b>${c.phone}</b></p><p>واتساب: <a href="https://wa.me/${c.whats}" target="_blank">اضغط هنا</a></p><p>العنوان: ${c.address}</p>`;document.getElementById('reqList').innerHTML=DB.requests.map((r,i)=>`<p><b>${r.name}</b> - ${r.type} - ${r.msg} <button onclick="delReq(${i})">حذف</button></p>`).join('')||'لا توجد طلبات';}
+function sendRequest(){let n=document.getElementById('name').value,m=document.getElementById('msg').value;if(!n||!m){alert('أكمل الاسم والتفاصيل');return;}DB.requests.push({name:n,phone:document.getElementById('phone').value,type:document.getElementById('type').value,msg:m});saveAll();document.getElementById('result').innerText='تم إرسال طلبك بنجاح';}
+function addNews(){let t=document.getElementById('newsTitle').value,x=document.getElementById('newsText').value,img=document.getElementById('newsImg').value;if(!t||!x){alert('أكمل العنوان والنص');return;}DB.news.unshift({title:t,text:x,img:img||'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'});saveAll();alert('تم نشر الخبر');}
+function delNews(i){DB.news.splice(i,1);saveAll();}
+function delReq(i){DB.requests.splice(i,1);saveAll();}
+function showAdmin(){document.getElementById('site').classList.add('hidden');document.getElementById('loginBox').classList.remove('hidden');}
+function hideAdmin(){document.getElementById('loginBox').classList.add('hidden');document.getElementById('site').classList.remove('hidden');}
+function loginAdmin(){if(document.getElementById('adminUser').value===DB.admin.user&&document.getElementById('adminPass').value===DB.admin.pass){document.getElementById('loginBox').classList.add('hidden');document.getElementById('dashboard').classList.remove('hidden');render();}else alert('كلمة السر خاطئة');}
+function quickLogin(){if(document.getElementById('quickUser').value===DB.admin.user) alert('مرحبا بك. للدخول للوحة التحكم اضغط لوحة تحكم واكتب admin / ABD123');}
+function logout(){document.getElementById('dashboard').classList.add('hidden');document.getElementById('site').classList.remove('hidden');}
+function toggleAI(){let p=document.getElementById('aiPanel');p.classList.toggle('hidden');if(!p.classList.contains('hidden')&&document.getElementById('aiMessages').innerHTML===''){document.getElementById('aiMessages').innerHTML='<div class="msg ai">أهلا بك. أنا ABD AI، مساعد حياة المواطن.</div>';}}
+function sendAIMsg(){let inp=document.getElementById('aiInput');let txt=inp.value.trim();if(!txt) return;document.getElementById('aiMessages').innerHTML+=`<div class="msg user">${txt}</div>`;inp.value='';setTimeout(()=>{document.getElementById('aiMessages').innerHTML+=`<div class="msg ai">فهمتك. أخبار اليوم: ارتفاع صادرات الأسماك، مشاريع جديدة في نواكشوط، المنتخب يستعد لمباريات قادمة.</div>`;},500);}
+render();
+</script>
+</body>
+</html>
